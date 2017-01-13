@@ -25,7 +25,7 @@ private:
 		T f, c, w;
 		Edge *next, *r;
 
-		Edge(Node *s, Node *t, T c, T w) : s(s), t(t), f(0), c(c), w(w), next(s->e), r(NULL) {}
+		Edge(Node *s, Node *t, T c, T w) : s(s), t(t), f(0), c(c), w(w), next(s->e), r(nullptr) {}
 	};
 
 public:
@@ -47,7 +47,7 @@ public:
 	inline void reset() {
 		for (int i = 0; i < MAXN; i++) {
 			N[i].inq = false;
-			N[i].c = NULL;
+			N[i].c = nullptr;
 			N[i].d = N[i].f = N[i].l = 0;
 		}
 	}
@@ -112,7 +112,7 @@ public:
 		flow = cost = 0;
 		while (1) {
 			for (int i = 0; i < n; i++) {
-				N[i].c = NULL;
+				N[i].c = nullptr;
 				N[i].inq = false;
 				N[i].f = 0;
 				N[i].d = MAX;

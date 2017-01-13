@@ -22,7 +22,7 @@ private:
         int bound;
 
         Node(Node **root, Node *fa, const T &x, int bound = 0) : root(root), fa(fa), x(x), cnt(1), size(1), bound(bound) {
-            ch[0] = ch[1] = NULL; // 不要忘记初始化
+            ch[0] = ch[1] = nullptr; // 不要忘记初始化
         }
 
         // 如果当前节点是其父节点的左儿子，返回 0 否则返回 1
@@ -64,14 +64,14 @@ private:
             maintain();
 
             // 如果转到了根，更新储存的指向根节点的指针
-            if (fa == NULL) {
+            if (fa == nullptr) {
                 *root = this;
             }
         }
 
         // 旋转到某一特定位置，如在删除时将后继节点旋转为根的右儿子
-        // target 为目标父节点，缺省参数为 NULL，即旋转直到成为根（没有父节点）
-        void splay(Node *target = NULL) {
+        // target 为目标父节点，缺省参数为 nullptr，即旋转直到成为根（没有父节点）
+        void splay(Node *target = nullptr) {
             while (fa != target) { // while (父节点不是目标父节点)
                 if (fa->fa == target) { // 父节点的父节点是目标父节点，直接转一次
                     rotate();
@@ -120,8 +120,8 @@ private:
         // 那么就可以插入到这里
         //
         // fa 是新节点的父节点
-        Node **v = &root, *fa = NULL;
-        while (*v != NULL && !((*v)->bound == 0 && equal(x, (*v)->x))) { // 直到找到一个空位置，或者找到原有的值为 x 的节点
+        Node **v = &root, *fa = nullptr;
+        while (*v != nullptr && !((*v)->bound == 0 && equal(x, (*v)->x))) { // 直到找到一个空位置，或者找到原有的值为 x 的节点
             fa = *v;    // 以上一次找到的不空的 v 作为父节点
             fa->size++; // 因为要在这棵子树下插入一个新的节点
 
@@ -143,7 +143,7 @@ private:
             }
         }
 
-        if (*v != NULL) {
+        if (*v != nullptr) {
             (*v)->cnt++;
         } else {
             (*v) = new Node(&root, fa, x, bound);
@@ -159,7 +159,7 @@ private:
     Node *find(const T &x) {
         // 从根节点开始找
         Node *v = root;
-        while (v != NULL && (v->bound != 0 || !equal(x, v->x))) {
+        while (v != nullptr && (v->bound != 0 || !equal(x, v->x))) {
             if (v->bound == -1) {
                 v = v->ch[1];
             } else if (v->bound == 1) {
@@ -176,7 +176,7 @@ private:
     }
 
 public:
-    Splay() : root(NULL) {
+    Splay() : root(nullptr) {
         insert(T(), -1);
         insert(T(), 1);
     }
@@ -209,7 +209,7 @@ public:
             v->cnt--;
         } else {
             delete succ->ch[0]; // 使用 delete 关键字（严格地说，new 和 delete 是运算符）释放 new 分配的内存
-            succ->ch[0] = NULL; // 不要忘记置空
+            succ->ch[0] = nullptr; // 不要忘记置空
         }
 
         // 删了节点，需要将大小减小
@@ -228,7 +228,7 @@ public:
     // 求一个数的前趋
     const T &pred(const T &x) {
         Node *v = find(x);
-        if (v == NULL) {
+        if (v == nullptr) {
             v = insert(x, 0);
             const T &res = v->pred()->x;
             erase(v);
@@ -241,7 +241,7 @@ public:
     // 求一个数的后继
     const T &succ(const T &x) {
         Node *v = find(x);
-        if (v == NULL) {
+        if (v == nullptr) {
             v = insert(x, 0);
             const T &res = v->succ()->x;
             erase(v);
@@ -254,7 +254,7 @@ public:
     // 求一个数的排名
     int rank(const T &x) {
         Node *v = find(x);
-        if (v == NULL) {
+        if (v == nullptr) {
             v = insert(x, 0);
             // 此时 v 已经是根节点了，因为新插入插入节点会被伸展
             int res = v->rank(); // 因为有一个无穷小，所以不需要 +1
