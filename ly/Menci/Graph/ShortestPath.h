@@ -103,12 +103,12 @@ public:
 			}
 		}
 
-		if (t != -1) return N[t].dist;
+		if (t != -1) return N[t].d;
 		else return -1;
 	}
 
 	inline T getDist(int u) {
-		return N[u].dist;
+		return N[u].d;
 	}
 };
 
