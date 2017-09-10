@@ -103,7 +103,7 @@ public:
 			}
 		}
 
-		if (t != -1) return N[t].d;
+		if (t != -1) return N[t].dist;
 		else return -1;
 	}
 
